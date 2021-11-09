@@ -1,0 +1,13 @@
+{
+    "eslint.nodePath": "node_modules/.bin/eslint",
+    "eslint.workingDirectories": [
+        "resources/js"
+    ],
+    "eslint.alwaysShowStatus": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
+    "css.validate": false,
+    "scss.validate": false
+}
