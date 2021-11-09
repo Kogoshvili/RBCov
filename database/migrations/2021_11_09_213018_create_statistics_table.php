@@ -13,10 +13,16 @@ class CreateStatisticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('statistics', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create(
+            'statistics',
+            function (Blueprint $table) {
+                $table->bigInteger('id')->autoIncrement();
+                $table->bigInteger('country_id');
+                $table->integer('confirmed');
+                $table->integer('recovered');
+                $table->integer('death');
+            }
+        );
     }
 
     /**
