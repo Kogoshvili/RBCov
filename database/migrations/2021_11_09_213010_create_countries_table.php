@@ -17,7 +17,7 @@ class CreateCountriesTable extends Migration
             'countries',
             function (Blueprint $table) {
                 $table->bigInteger('id')->autoIncrement();
-                $table->string('code');
+                $table->string('code')->unique();
                 $table->json('name');
             }
         );

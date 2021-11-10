@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Models\Country;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/',
+    function () {
+        return view('welcome');
+    }
+);

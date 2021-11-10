@@ -17,7 +17,7 @@ class CreateStatisticsTable extends Migration
             'statistics',
             function (Blueprint $table) {
                 $table->bigInteger('id')->autoIncrement();
-                $table->bigInteger('country_id');
+                $table->bigInteger('country_id')->unique();
                 $table->integer('confirmed');
                 $table->integer('recovered');
                 $table->integer('death');

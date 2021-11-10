@@ -44,24 +44,24 @@ class GetCountries extends Command
         $response = Http::get(env('API_COUNTRIES'));
 
         if ($response->successful()) {
-            $countries = $response->collect()
-                ->map(
-                    function ($item, $key) {
-                        return [
-                            'code' => $item['code'],
-                            'name' => json_encode($item['name']),
-                        ];
-                    }
-                );
+            $countries = array_map(
+                function ($item) {
+                    return [
+                        'code' => $item['code'],
+                        'name' => json_encode($item['name']),
+                    ];
+                },
+                $response->json()
+            );
 
             try {
                 Country::upsert(
-                    $countries->toArray(),
+                    $countries,
                     ['code'],
                     ['name']
                 );
             } catch (QueryException $e) {
-                $this->error('Something went wrong (DB)');
+                $this->error("Something went wrong: {$e->getMessage()}");
                 return Command::FAILURE;
             }
 

@@ -45,7 +45,7 @@ class GetStatistics extends Command
         $data = [];
         if (Country::exists()) {
             foreach (Country::lazy() as $country) {
-                $this->info("Importing {$country->code}");
+                $this->info("Retrieving {$country->code} Statistics");
 
                 $response = Http::post(
                     env('API_STATISTICS'),
@@ -64,12 +64,12 @@ class GetStatistics extends Command
 
             try {
                 Statistic::upsert(
-                    $data
+                    $data,
                     ['country_id'],
                     ['confirmed', 'recovered', 'death']
                 );
             } catch (QueryException $e) {
-                $this->error('Something went wrong (DB)');
+                $this->error("Something went wrong: {$e->getMessage()}");
                 return Command::FAILURE;
             }
 
