@@ -57,7 +57,8 @@ class GetCountries extends Command
             try {
                 Country::upsert(
                     $countries->toArray(),
-                    ['code', 'name']
+                    ['code'],
+                    ['name']
                 );
             } catch (QueryException $e) {
                 $this->error('Something went wrong (DB)');

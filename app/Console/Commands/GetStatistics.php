@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Client\RequestException;
 use App\Models\Country;
 use App\Models\Statistic;
 
@@ -61,7 +63,11 @@ class GetStatistics extends Command
             }
 
             try {
-                Statistic::insert($data);
+                Statistic::upsert(
+                    $data
+                    ['country_id'],
+                    ['confirmed', 'recovered', 'death']
+                );
             } catch (QueryException $e) {
                 $this->error('Something went wrong (DB)');
                 return Command::FAILURE;
