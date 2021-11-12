@@ -16,6 +16,13 @@ class Statistic extends Model
      */
     public $timestamps = false;
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = ['country_id'];
+
     public function country()
     {
         return $this->belongsTo(Country::class);

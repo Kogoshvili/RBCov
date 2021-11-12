@@ -7,11 +7,24 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Pages
+@import './pages/pages';
+
+// Components
+@import './components/components';
+
+
+html,
+body {
+    height: 100%;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: $body-bg;
 }
 
-.class {
-  color: #fff333;
+#root {
 }
-

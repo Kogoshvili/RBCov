@@ -11286,10 +11286,44 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-body {
-  font-family: "Nunito", sans-serif;
+#Authorization {
+  text-align: center;
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+#Authorization .floating-toggle {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+#Authorization .form-floating:focus-within {
+  z-index: 2;
+}
+#Authorization input[type=email] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#Authorization input[type=password] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+#Authorization input[type=text] {
+  border-radius: 0;
+  border-bottom: 0;
 }
 
-.class {
-  color: #fff333;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f8fafc;
 }

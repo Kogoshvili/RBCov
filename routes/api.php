@@ -20,4 +20,4 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // Data
 Route::get('/countries', [DataController::class, 'getCountries'])->middleware('auth:sanctum');
-Route::get('/statistics', [DataController::class, 'getStatistics'])->middleware('auth:sanctum');
+Route::post('/statistics', [DataController::class, 'getStatistics'])->middleware('auth:sanctum');
