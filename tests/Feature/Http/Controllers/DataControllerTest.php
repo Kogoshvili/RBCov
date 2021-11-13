@@ -105,7 +105,7 @@ class DataControllerTest extends TestCase
                 'Accept' => 'application/json',
                 'Authorization' => "Bearer {$this->getToken()}"
             ]
-        )->getJson('/api/statistics');
+        )->postJson('/api/statistics');
 
         $response->assertStatus(200)
             ->assertJson(function (AssertableJson $json) {
@@ -125,7 +125,7 @@ class DataControllerTest extends TestCase
     {
         $response = $this->withHeaders(
             ['Accept' => 'application/json']
-        )->get('/api/statistics');
+        )->post('/api/statistics');
 
         $response->assertStatus(401);
     }

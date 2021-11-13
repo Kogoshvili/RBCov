@@ -17,7 +17,8 @@ class StatisticFactory extends Factory
         return [
             'confirmed' => $this->faker->randomNumber(5, false),
             'recovered' => $this->faker->randomNumber(5, false),
-            'death' => $this->faker->randomNumber(5, false)
+            'death' => $this->faker->randomNumber(5, false),
+            'date' => \Carbon\Carbon::now()->toDateString(),
         ];
     }
 }
