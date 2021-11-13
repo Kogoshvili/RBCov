@@ -16,11 +16,13 @@ class CreateStatisticsTable extends Migration
         Schema::create(
             'statistics',
             function (Blueprint $table) {
-                $table->bigInteger('id')->autoIncrement();
-                $table->bigInteger('country_id')->unique();
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('country_id');
                 $table->integer('confirmed');
                 $table->integer('recovered');
                 $table->integer('death');
+                $table->date('date');
+                $table->unique(['country_id', 'date']);
             }
         );
     }

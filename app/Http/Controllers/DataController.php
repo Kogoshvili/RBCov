@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Statistic;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 
 class DataController extends Controller
@@ -52,7 +50,8 @@ class DataController extends Controller
      */
     public function getStatistics(Request $request)
     {
-        $result = Statistic::join('countries', 'countries.id', '=', 'statistics.country_id');
+        $result = Statistic::join('countries', 'countries.id', '=', 'statistics.country_id')
+            ->where('date', \Carbon\Carbon::now()->toDateString());
 
         if ($request->has('orderby')) {
             $result->orderBy(
@@ -68,13 +67,11 @@ class DataController extends Controller
             if ($key === 'country') {
                 $result->whereHas(
                     'country', fn($query) =>
-                    $query->where(
-                        "name->{$this->locale}",
-                        'ilike',
-                        "{$value}%"
+                    $query->whereRaw(
+                        'LOWER(`name`->>"$.en") LIKE ?',
+                        [strtolower($value).'%']
                     )
                 );
-
                 continue;
             }
 

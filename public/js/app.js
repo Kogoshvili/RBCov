@@ -7237,7 +7237,7 @@ function Dashboard() {
         children: __('log out')
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      headers: ['country', 'confirmed', 'recovered', 'deaths'],
+      headers: ['country', 'confirmed', 'recovered', 'death'],
       data: data,
       pagination: pagination,
       orderable: true,
@@ -7527,7 +7527,7 @@ module.exports = {
     'country': 'Country',
     'confirmed': 'Confirmed',
     'recovered': 'Recovered',
-    'deaths': 'Deaths',
+    'death': 'Death',
     'log out': 'Log Out',
     'log in': 'Log in',
     'register': 'Register',
@@ -7541,7 +7541,7 @@ module.exports = {
     'country': 'ქვეყანა',
     'confirmed': 'დადასტურებული',
     'recovered': 'გამოჯამრთელებული',
-    'deaths': 'გარდაცვლილი',
+    'death': 'გარდაცვლილი',
     'log out': 'გამოსვლა',
     'log in': 'შესვლა',
     'register': 'რეგისტრაცია',

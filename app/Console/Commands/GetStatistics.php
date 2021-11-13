@@ -57,7 +57,8 @@ class GetStatistics extends Command
                         'country_id' => $country->id,
                         'confirmed' => $response->json('confirmed'),
                         'recovered' => $response->json('recovered'),
-                        'death' => $response->json('deaths')
+                        'death' => $response->json('deaths'),
+                        'date' => \Carbon\Carbon::now()
                     ];
                 }
             }
@@ -65,7 +66,7 @@ class GetStatistics extends Command
             try {
                 Statistic::upsert(
                     $data,
-                    ['country_id'],
+                    ['country_id', 'date'],
                     ['confirmed', 'recovered', 'death']
                 );
             } catch (QueryException $e) {

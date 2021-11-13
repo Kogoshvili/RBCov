@@ -79,7 +79,7 @@ function Dashboard() {
                 <button className="btn btn-secondary" onClick={() => dispatch(clearToken())}>{__('log out')}</button>
             </div>
             <Table
-                headers={['country', 'confirmed', 'recovered', 'deaths']}
+                headers={['country', 'confirmed', 'recovered', 'death']}
                 data={data}
                 pagination={pagination}
                 orderable={true}
