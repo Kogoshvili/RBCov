@@ -1,0 +1,63 @@
+.Table {
+    .pagination-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: $white;
+        border-bottom: 2px solid $black;
+        padding: 20px 0;
+
+        ul {
+            margin: 0;
+        }
+    }
+
+    .table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        margin: 0;
+
+        thead {
+            tr {
+                &:first-child {
+                    th {
+                        padding-right: 40px;
+                    }
+                }
+            }
+
+            th {
+                position: relative;
+
+                input[type='radio'] {
+                    appearance: none;
+                    margin: 0;
+                    position: absolute;
+                    right: 10px;
+                    height: 20px;
+                    width: 20px;
+                }
+
+                input[type='radio']::before {
+                    content: '';
+                    display: block;
+                    height: 10px;
+                    width: 10px;
+                    border-top: 2px solid $blue;
+                    border-right: 2px solid $blue;
+                    transform: rotate(-45deg);
+                    margin-top: 10px;
+                    transition: all 0.3s ease;
+                }
+
+                input[type='radio']:checked::before {
+                    margin-top: 5px;
+                    transform: rotate(135deg);
+                }
+            }
+        }
+    }
+}

@@ -31,6 +31,10 @@
         "react/react-in-jsx-scope": "off",
         "eqeqeq": ["error", "smart"],
         "modules-newline/import-declaration-newline": "warn",
-        "modules-newline/export-declaration-newline": "warn"
+        "modules-newline/export-declaration-newline": "warn",
+        "no-unused-vars": ["error", { "varsIgnorePattern": "_","ignoreRestSiblings": true }]
+    },
+    "globals": {
+        "__": "readonly"
     }
 }

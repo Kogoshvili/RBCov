@@ -2,8 +2,10 @@ import {
     useDispatch,
     useSelector
 } from 'react-redux';
-import { authenticateUser,
-    registerUser } from '../store/authSlice';
+import {
+    authenticateUser,
+    registerUser
+} from '../store/authSlice';
 import { useState } from 'react';
 
 function Authorization() {
@@ -31,19 +33,19 @@ function Authorization() {
         return (
             <>
                 <div className="form-floating">
-                    <input type="email" className="form-control" name="email" id="floatingInput" placeholder="name@example.com" onChange={(e) => handleInputChange(e)}/>
-                    <label htmlFor="floatingInput">Email</label>
+                    <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" onChange={(e) => handleInputChange(e)}/>
+                    <label htmlFor="email">{__('email')}</label>
                 </div>
                 {
                     register && (
                         <div className="form-floating">
-                            <input type="text" className="form-control" name="name" id="floatingInput" placeholder="John" onChange={(e) => handleInputChange(e)}/>
-                            <label htmlFor="floatingInput">Name</label>
+                            <input type="text" className="form-control" name="name" id="name" placeholder="John" onChange={(e) => handleInputChange(e)}/>
+                            <label htmlFor="name">{__('Name')}</label>
                         </div>)
                 }
                 <div className="form-floating">
-                    <input type="password" name="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => handleInputChange(e)}/>
-                    <label htmlFor="floatingPassword">Password</label>
+                    <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e) => handleInputChange(e)}/>
+                    <label htmlFor="password">{__('Password')}</label>
                 </div>
             </>
         );
@@ -52,9 +54,9 @@ function Authorization() {
     return (
         <div id="Authorization">
             <div className="floating-toggle">
-                <button className="btn btn-secondary" onClick={() => setRegister(!register) }>{ register ? 'Sign In' : 'Register' }</button>
+                <button className="btn btn-secondary" onClick={() => setRegister(!register) }>{ register ? __('log in') : __('register') }</button>
             </div>
-            <h1 className="h3 mb-3 fw-normal">Authorization</h1>
+            <h1 className="h3 mb-3 fw-normal">{__('Authorization')}</h1>
             <form>
                 { formFields() }
                 <button
@@ -62,7 +64,7 @@ function Authorization() {
                     type="submit"
                     onClick={handleSubmit}
                 >
-                    Submit
+                    { register ? __('register') : __('log in') }
                 </button>
             </form>
             {error && <p className="mt-2 text-danger">{error}</p>}

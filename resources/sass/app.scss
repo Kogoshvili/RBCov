@@ -1,18 +1,9 @@
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
 @import 'variables';
-
-// Bootstrap
+@import 'mixins';
 @import '~bootstrap/scss/bootstrap';
-
-// Pages
 @import './pages/pages';
-
-// Components
 @import './components/components';
-
 
 html,
 body {
@@ -27,4 +18,12 @@ body {
 }
 
 #root {
+}
+
+.form-control {
+    background-color: $white;
+}
+
+button {
+    text-transform: capitalize;
 }

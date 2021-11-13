@@ -6,9 +6,35 @@ use App\Models\Country;
 use App\Models\Statistic;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 
 class DataController extends Controller
 {
+    /**
+     * Localization value
+     *
+     * @var string
+     */
+    private $locale;
+
+    /**
+     * List of properties that can be used to filter statistics.
+     *
+     * @var array
+     */
+    private $filterable = [
+        'country',
+        'confirmed',
+        'recovered',
+        'death'
+    ];
+
+    public function __construct()
+    {
+        $this->locale = App::currentLocale();
+    }
+
     /**
      * Get List Of Countries
      *
@@ -26,43 +52,33 @@ class DataController extends Controller
      */
     public function getStatistics(Request $request)
     {
-        $result = Statistic::join('countries', 'countries.id', '=', 'statistics.country_id')
-            ->orderBy('code',  $request->country['orderby'] ?? 'asc');
+        $result = Statistic::join('countries', 'countries.id', '=', 'statistics.country_id');
 
-        if ($request->country) {
-            if (@$request->country['value']) {
-                $langugeCode = preg_match('/[^A-Za-z0-9]/', $request->country['value']) ? 'ge' : 'en';
+        if ($request->has('orderby')) {
+            $result->orderBy(
+                $request->orderby['orderby'] === 'country'
+                    ? "name->{$this->locale}" : $request->orderby['orderby'],
+                $request->orderby['direction']
+            );
+        } else {
+            $result->orderBy("name->{$this->locale}", 'desc');
+        }
+
+        foreach($request->only($this->filterable) as $key => $value) {
+            if ($key === 'country') {
                 $result->whereHas(
                     'country', fn($query) =>
-                    $query->where("name->{$langugeCode}", 'ilike', "%{$request->country['value']}%")
+                    $query->where(
+                        "name->{$this->locale}",
+                        'ilike',
+                        "{$value}%"
+                    )
                 );
-            }
-        }
 
-        if ($request->confirmed) {
-            if (@$request->confirmed['value']) {
-                $result->where('confirmed', $request->confirmed['value']);
-            }
-        }
-
-        if ($request->recovered) {
-            if (@$request->recovered['value']) {
-                $result->where('recovered', $request->recovered['value']);
+                continue;
             }
 
-            if (@$request->recovered['orderby']) {
-                $result->orderBy('recovered', $request->recovered['orderby']);
-            }
-        }
-
-        if ($request->death) {
-            if (@$request->death['value']) {
-                $result->where('death', $request->death['value']);
-            }
-
-            if (@$request->death['orderby']) {
-                $result->orderBy('death', $request->death['orderby']);
-            }
+            $result->where($key, $value);
         }
 
         return $result->with('country')->paginate(10);
