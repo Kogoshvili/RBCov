@@ -6,9 +6,11 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import Table from '../components/Table';
 import { clearToken } from '../store/authSlice';
+import Modal from '../components/Modal';
 
 function Dashboard() {
     const dispatch = useDispatch();
+    const [modal, setModal] = useState({ visible: false });
     const [data, setData] = useState([]);
     const [params, setParams] = useState({});
     const [pagination, setPagination] = useState({});
@@ -62,8 +64,26 @@ function Dashboard() {
         setPagination(pagination);
     };
 
+    const onRowClick = (item) => {
+        setModal(
+            (prevState) => ({
+                visible: !prevState.visible,
+                title: __(item.country.name),
+                content: (
+                    <div className="card">
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">{__('confirmed')}: { item.confirmed }</li>
+                            <li className="list-group-item">{__('recovered')}: { item.recovered }</li>
+                            <li className="list-group-item">{__('death')}: { item.death }</li>
+                        </ul>
+                    </div>
+                )
+            })
+        );
+    };
+
     const renderData = (rows) => rows?.map((item, index) =>
-        <tr key={item.id}>
+        <tr key={item.id} onClick={() => onRowClick(item)}>
             { pagination && <th scope="row">{ pagination.from + index }</th> }
             <td>{ __(item.country.name) }</td>
             <td>{ item.confirmed }</td>
@@ -89,6 +109,7 @@ function Dashboard() {
                 handleTextInputChange={handleTextInputChange}
                 dataRenderer={renderData}
             />
+            <Modal {...modal} onCloseClick={() => setModal(prevState => ({ ...prevState, visible: false })) } />
         </div>
     );
 }

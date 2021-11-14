@@ -11,7 +11,8 @@ function Table({
     handleTextInputChange,
     dataRenderer,
     headerRenderer,
-    pageRendered
+    pageRendered,
+    onRowClick
 }) {
     const renderHeaders = () =>
         <thead>
@@ -54,7 +55,7 @@ function Table({
         </thead>;
 
     const renderData = () => data?.map((item, index) =>
-        <tr key={item.id}>
+        <tr key={item.id} onClick={() => onRowClick?.(item)}>
             { pagination && <th scope="row">{ pagination.from + index }</th> }
             {
                 headers.map((header) =>
@@ -107,7 +108,8 @@ Table.propTypes = {
     handleTextInputChange: PropTypes.func,
     dataRenderer: PropTypes.func,
     headerRenderer: PropTypes.func,
-    pageRendered: PropTypes.func
+    pageRendered: PropTypes.func,
+    onRowClick: PropTypes.func
 };
 
 export default Table;

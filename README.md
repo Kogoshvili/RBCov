@@ -1,2 +1,3 @@
-./vendor/bin/sail up  
+make start
+
 localhost:8000

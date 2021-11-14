@@ -1,0 +1,23 @@
+.Modal {
+    .modal {
+        display: block;
+
+        .modal-dialog {
+            margin: 20% auto;
+        }
+
+        &::after {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            content: '';
+            background-color: $black;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+            z-index: -1;
+        }
+    }
+
+}

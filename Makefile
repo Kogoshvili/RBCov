@@ -1,16 +1,16 @@
 include .env
 
-.PHONY: check up stop down
-
-check:
-	docker --version
-	docker-compose --version
+.PHONY: up start stop
 
 up:
-	docker-compose up --detach
+	./vendor/bin/sail up -d
+
+start:
+	./vendor/bin/sail up -d && \
+	./vendor/bin/sail npm run dev && \
+	./vendor/bin/sail artisan migrate && \
+	./vendor/bin/sail artisan rbcov:countries && \
+	./vendor/bin/sail artisan rbcov:statistics
 
 stop:
-	docker-compose stop
-
-down:
-	docker-compose down --remove-orphans
+	./vendor/bin/sail stop

@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\App;
 class DataController extends Controller
 {
     /**
-     * Localization value
-     *
-     * @var string
-     */
-    private $locale;
-
-    /**
      * List of properties that can be used to filter statistics.
      *
      * @var array
@@ -27,11 +20,6 @@ class DataController extends Controller
         'recovered',
         'death'
     ];
-
-    public function __construct()
-    {
-        $this->locale = App::currentLocale();
-    }
 
     /**
      * Get List Of Countries
@@ -50,17 +38,18 @@ class DataController extends Controller
      */
     public function getStatistics(Request $request)
     {
+        $lang = App::currentLocale();
         $result = Statistic::join('countries', 'countries.id', '=', 'statistics.country_id')
             ->where('date', \Carbon\Carbon::now()->toDateString());
 
         if ($request->has('orderby')) {
             $result->orderBy(
                 $request->orderby['orderby'] === 'country'
-                    ? "name->{$this->locale}" : $request->orderby['orderby'],
+                    ? "name->{$lang}" : $request->orderby['orderby'],
                 $request->orderby['direction']
             );
         } else {
-            $result->orderBy("name->{$this->locale}", 'desc');
+            $result->orderBy("name->{$lang}", 'desc');
         }
 
         foreach($request->only($this->filterable) as $key => $value) {
@@ -68,7 +57,7 @@ class DataController extends Controller
                 $result->whereHas(
                     'country', fn($query) =>
                     $query->whereRaw(
-                        'LOWER(`name`->>"$.en") LIKE ?',
+                        'LOWER(`name`->>"$.'.$lang.'") LIKE ?',
                         [strtolower($value).'%']
                     )
                 );

@@ -6736,6 +6736,73 @@ function Localization() {
 
 /***/ }),
 
+/***/ "./resources/js/app/components/Modal.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/app/components/Modal.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function Modal(_ref) {
+  var _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      _ref$content = _ref.content,
+      content = _ref$content === void 0 ? '' : _ref$content,
+      _ref$visible = _ref.visible,
+      visible = _ref$visible === void 0 ? false : _ref$visible,
+      onCloseClick = _ref.onCloseClick;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "Modal",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "modal",
+      style: {
+        'display': visible ? 'block' : 'none'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "modal-dialog",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "modal-content",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "modal-header",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+              className: "modal-title",
+              children: title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              type: "button",
+              className: "btn-close",
+              onClick: onCloseClick
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "modal-body",
+            children: content
+          })]
+        })
+      })
+    })
+  });
+}
+
+Modal.propTypes = {
+  title: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string),
+  content: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().any),
+  visible: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().bool),
+  onCloseClick: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Modal);
+
+/***/ }),
+
 /***/ "./resources/js/app/components/Table.jsx":
 /*!***********************************************!*\
   !*** ./resources/js/app/components/Table.jsx ***!
@@ -6765,7 +6832,8 @@ function Table(_ref) {
       handleTextInputChange = _ref.handleTextInputChange,
       dataRenderer = _ref.dataRenderer,
       headerRenderer = _ref.headerRenderer,
-      pageRendered = _ref.pageRendered;
+      pageRendered = _ref.pageRendered,
+      onRowClick = _ref.onRowClick;
 
   var renderHeaders = function renderHeaders() {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("thead", {
@@ -6809,6 +6877,9 @@ function Table(_ref) {
   var renderData = function renderData() {
     return data === null || data === void 0 ? void 0 : data.map(function (item, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
+        onClick: function onClick() {
+          return onRowClick === null || onRowClick === void 0 ? void 0 : onRowClick(item);
+        },
         children: [pagination && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
           scope: "row",
           children: pagination.from + index
@@ -6871,7 +6942,8 @@ Table.propTypes = {
   handleTextInputChange: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
   dataRenderer: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
   headerRenderer: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
-  pageRendered: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func)
+  pageRendered: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func),
+  onRowClick: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().func)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Table);
 
@@ -7056,7 +7128,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Table */ "./resources/js/app/components/Table.jsx");
 /* harmony import */ var _store_authSlice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/authSlice */ "./resources/js/app/store/authSlice.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Modal */ "./resources/js/app/components/Modal.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var _excluded = ["data"];
@@ -7100,23 +7173,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Dashboard() {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    visible: false
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
+      modal = _useState2[0],
+      setModal = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      params = _useState4[0],
-      setParams = _useState4[1];
+      data = _useState4[0],
+      setData = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
       _useState6 = _slicedToArray(_useState5, 2),
-      pagination = _useState6[0],
-      setPagination = _useState6[1];
+      params = _useState6[0],
+      setParams = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      pagination = _useState8[0],
+      setPagination = _useState8[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     return getData();
@@ -7204,39 +7285,67 @@ function Dashboard() {
     };
   }();
 
+  var onRowClick = function onRowClick(item) {
+    setModal(function (prevState) {
+      return {
+        visible: !prevState.visible,
+        title: __(item.country.name),
+        content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "card",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("ul", {
+            className: "list-group list-group-flush",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
+              className: "list-group-item",
+              children: [__('confirmed'), ": ", item.confirmed]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
+              className: "list-group-item",
+              children: [__('recovered'), ": ", item.recovered]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
+              className: "list-group-item",
+              children: [__('death'), ": ", item.death]
+            })]
+          })
+        })
+      };
+    });
+  };
+
   var renderData = function renderData(rows) {
     return rows === null || rows === void 0 ? void 0 : rows.map(function (item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-        children: [pagination && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+        onClick: function onClick() {
+          return onRowClick(item);
+        },
+        children: [pagination && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
           scope: "row",
           children: pagination.from + index
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
           children: __(item.country.name)
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
           children: item.confirmed
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
           children: item.recovered
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
           children: item.death
         })]
       }, item.id);
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     id: "Dashboard",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
       children: __('dashboard')
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "logout-wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
         className: "btn btn-secondary",
         onClick: function onClick() {
           return dispatch((0,_store_authSlice__WEBPACK_IMPORTED_MODULE_5__.clearToken)());
         },
         children: __('log out')
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
       headers: ['country', 'confirmed', 'recovered', 'death'],
       data: data,
       pagination: pagination,
@@ -7246,7 +7355,15 @@ function Dashboard() {
       handleRadioChange: handleRadioChange,
       handleTextInputChange: handleTextInputChange,
       dataRenderer: renderData
-    })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_6__["default"], _objectSpread(_objectSpread({}, modal), {}, {
+      onCloseClick: function onCloseClick() {
+        return setModal(function (prevState) {
+          return _objectSpread(_objectSpread({}, prevState), {}, {
+            visible: false
+          });
+        });
+      }
+    }))]
   });
 }
 
